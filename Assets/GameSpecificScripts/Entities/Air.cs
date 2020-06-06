@@ -10,12 +10,15 @@ public class Air : Tile
 
     override public void render(Pos3 center) {
         base.render(center);
-        //TODO *Could* do depth shading by making air slightly visible
+        //TODO Decide whether to use visible air OR warpColor, for depth
         GL.Begin(GL.QUADS);
         GL.Color(ColorScheme.AIR);
-        float ox = (float)(pos.x - center.x);
-        float oy = (float)(pos.y - center.y);
-        float oz = (float)(pos.z - center.z);
+        // float ox = (float)(pos.x - center.x);
+        // float oy = (float)(pos.y - center.y);
+        // float oz = (float)(pos.z - center.z);
+        float ox = 0;
+        float oy = 0;
+        float oz = 0;
         GL.Vertex3(ox-0.5f, oy-0.5f, oz);
         GL.Vertex3(ox+0.5f, oy-0.5f, oz);
         GL.Vertex3(ox+0.5f, oy+0.5f, oz);

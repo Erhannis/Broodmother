@@ -36,11 +36,16 @@ public class World
     public void render(Pos3 center, Pos3 downWestSouth, Pos3 upEastNorth) {
         //TODO Scale?
         Debug.Log("world render " + center + " " + downWestSouth + "->" + upEastNorth);
-        for (long z = downWestSouth.z; z <= upEastNorth.z; z++) {
-            for (long y = downWestSouth.y; y <= upEastNorth.y; y++) {
-                for (long x = downWestSouth.x; x <= upEastNorth.x; x++) {
+        for (long y = downWestSouth.y; y <= upEastNorth.y; y++) {
+            long dy = y - center.y;
+            for (long x = downWestSouth.x; x <= upEastNorth.x; x++) {
+                long dx = x - center.x;
+                for (long z = downWestSouth.z; z <= upEastNorth.z; z++) {
+                    long dz = z - center.z;
+                    GL.PushMatrix();
+                    GL.modelview = Matrix4x4.Translate(new Vector3(dx,dy,dz)) * GL.modelview;
                     getTile(new Pos3(x,y,z)).render(center);
-                    //TODO ???
+                    GL.PopMatrix();
                 }
             }
         }
